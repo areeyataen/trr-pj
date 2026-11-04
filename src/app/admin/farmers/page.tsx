@@ -2,7 +2,6 @@
 
 import { useEffect, useState, useMemo } from "react";
 import Link from "next/link";
-import { signOut } from "next-auth/react";
 
 export const dynamic = "force-dynamic";
 
@@ -205,14 +204,6 @@ export default function FarmersListPage() {
                 <span>🔄</span>
                 <span>รีเฟรช</span>
               </button>
-              <button
-                type="button"
-                onClick={() => signOut({ callbackUrl: "/login" })}
-                className="px-3.5 py-2.5 bg-red-100 hover:bg-red-200 active:scale-95 text-red-700 font-bold text-xs rounded-xl transition flex items-center gap-1"
-              >
-                <span>🚪</span>
-                <span>ออกจากระบบ</span>
-              </button>
             </div>
           </div>
 
@@ -333,30 +324,30 @@ export default function FarmersListPage() {
                           <button
                             type="button"
                             onClick={() => setSelectedFarmer(f)}
-                            className="px-2.5 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-lg transition"
+                            className="px-2.5 py-1.5 border border-slate-200 bg-white hover:bg-slate-100 hover:border-slate-300 text-slate-600 font-semibold text-xs rounded-lg transition flex items-center gap-1"
                             title="ดูข้อมูลทั้งหมด"
                           >
-                            👁️ ดู
+                            <span>👁️</span>
                           </button>
-                          
+
                           {/* แก้ไข */}
                           <button
                             type="button"
                             onClick={() => openEditModal(f)}
-                            className="px-2.5 py-1.5 bg-blue-50 hover:bg-blue-100 text-blue-700 font-bold text-xs rounded-lg transition"
+                            className="px-2.5 py-1.5 border border-blue-200 bg-blue-50 hover:bg-blue-100 text-blue-700 font-semibold text-xs rounded-lg transition flex items-center gap-1"
                             title="แก้ไขข้อมูล"
                           >
-                            ✏️ แก้ไข
+                            <span>✏️</span>
                           </button>
 
                           {/* ลบ */}
                           <button
                             type="button"
                             onClick={() => setDeletingFarmer(f)}
-                            className="px-2.5 py-1.5 bg-red-50 hover:bg-red-100 text-red-600 font-bold text-xs rounded-lg transition"
+                            className="px-2.5 py-1.5 border border-red-200 bg-red-50 hover:bg-red-100 text-red-600 font-semibold text-xs rounded-lg transition flex items-center gap-1"
                             title="ลบผู้ใช้นี้"
                           >
-                            🗑️ ลบ
+                            <span>🗑️</span>
                           </button>
                         </div>
                       </td>
@@ -478,7 +469,7 @@ export default function FarmersListPage() {
                     required
                     value={editFullName}
                     onChange={(e) => setEditFullName(e.target.value)}
-                    className="w-full border rounded-xl p-2.5 text-sm border-slate-200 focus:outline-blue-500"
+                    className="w-full border rounded-xl p-2.5 text-sm border-slate-200 text-slate-950 focus:outline-blue-500"
                   />
                 </div>
 
@@ -491,7 +482,7 @@ export default function FarmersListPage() {
                     required
                     value={editPhone}
                     onChange={(e) => setEditPhone(e.target.value)}
-                    className="w-full border rounded-xl p-2.5 text-sm border-slate-200 focus:outline-blue-500"
+                    className="w-full border rounded-xl p-2.5 text-sm border-slate-200 text-slate-950 focus:outline-blue-500"
                   />
                 </div>
 
@@ -504,7 +495,7 @@ export default function FarmersListPage() {
                     min={0}
                     value={editPoints}
                     onChange={(e) => setEditPoints(Number(e.target.value))}
-                    className="w-full border rounded-xl p-2.5 text-sm border-slate-200 font-bold text-amber-800 focus:outline-blue-500"
+                    className="w-full border rounded-xl p-2.5 text-sm border-slate-200 text-slate-950 font-bold text-amber-800 focus:outline-blue-500"
                   />
                 </div>
 

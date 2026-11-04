@@ -7,25 +7,6 @@ export default function HomePage() {
   const { data: session, status } = useSession();
   const isAdmin = (session?.user as any)?.role === "admin";
 
-  // เมนูสำหรับทุกคน (ไม่ต้อง login)
-  const publicMenus = [
-    {
-      title: "ลงทะเบียนสมาชิกผ่าน LINE ",
-      desc: "สำหรับสมัครสมาชิก",
-      href: "/register",
-      tag: "LINE OA",
-      tagColor: "bg-emerald-600",
-      icon: "💬",
-    },
-    {
-      title: "คะแนนสะสม Real-time & สแกนรับแต้ม (Claim)",
-      desc: "ดูแต้มสะสมชาวไร่อัปเดตสดแบบ Real-time และกดรับแต้มผ่าน QR Code ใบชั่ง",
-      href: "/claim",
-      tag: "Live Points",
-      tagColor: "bg-blue-600",
-      icon: "⭐",
-    },
-  ];
 
   // เมนูสำหรับ Admin เท่านั้น
   const adminMenus = [
@@ -102,37 +83,6 @@ export default function HomePage() {
             </button>
           )}
         </div>
-
-        {/* Public menus — แสดงเฉพาะเมื่อยังไม่ได้ล็อกอินเป็น Admin */}
-        {!isAdmin && (
-          <div className="space-y-3 mb-4">
-            {publicMenus.map((m, idx) => (
-              <Link
-                key={idx}
-                href={m.href}
-                className="block bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md hover:border-emerald-400 transition-all group"
-              >
-                <div className="flex items-start gap-4">
-                  <div className="text-3xl p-3 bg-slate-50 rounded-xl group-hover:bg-emerald-50 transition-colors">
-                    {m.icon}
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2">
-                      <h2 className="text-base font-bold text-slate-800 group-hover:text-emerald-700 transition-colors">
-                        {m.title}
-                      </h2>
-                      <span className={`text-[10px] text-white px-2 py-0.5 rounded-full font-bold ${m.tagColor}`}>
-                        {m.tag}
-                      </span>
-                    </div>
-                    <p className="text-slate-500 text-xs mt-1 leading-relaxed">{m.desc}</p>
-                  </div>
-                  <div className="text-slate-400 group-hover:text-emerald-600 font-bold text-lg">→</div>
-                </div>
-              </Link>
-            ))}
-          </div>
-        )}
 
         {/* Admin menus — เห็นเฉพาะ Admin */}
         {isAdmin && (

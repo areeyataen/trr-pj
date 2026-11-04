@@ -119,8 +119,16 @@ export default function LineRegisterPage() {
       setStatusNotice({ type: "error", text: "⚠️ กรุณากรอกชื่อ - นามสกุลจริง" });
       return;
     }
+    if (!/^[\u0E00-\u0E7F\s]+$/.test(fullName.trim())) {
+      setStatusNotice({ type: "error", text: "⚠️ กรุณากรอกชื่อ - นามสกุลเป็นภาษาไทยเท่านั้น" });
+      return;
+    }
     if (!phone.trim()) {
       setStatusNotice({ type: "error", text: "⚠️ กรุณากรอกเบอร์โทรศัพท์" });
+      return;
+    }
+    if (!/^\d{10}$/.test(phone)) {
+      setStatusNotice({ type: "error", text: "⚠️ เบอร์โทรศัพท์ต้องเป็นตัวเลข 10 หลักเท่านั้น" });
       return;
     }
 
@@ -346,9 +354,9 @@ export default function LineRegisterPage() {
             </label>
             <input
               type="text"
-              placeholder="เช่น นายสมหมาย มั่นคง"
+              placeholder="เช่น สมหมาย มั่นคง"
               value={fullName}
-              onChange={(e) => setFullName(e.target.value)}
+              onChange={(e) => setFullName(e.target.value.replace(/[^\u0E00-\u0E7F\s]/g, ""))}
               className="w-full border rounded-xl p-3 text-sm border-slate-200 text-slate-950 focus:outline-emerald-500"
             />
           </div>
@@ -359,9 +367,12 @@ export default function LineRegisterPage() {
             </label>
             <input
               type="tel"
-              placeholder="081-xxx-xxxx"
+              inputMode="numeric"
+              pattern="[0-9]{10}"
+              maxLength={10}
+              placeholder="0812345678"
               value={phone}
-              onChange={(e) => setPhone(e.target.value)}
+              onChange={(e) => setPhone(e.target.value.replace(/\D/g, "").slice(0, 10))}
               className="w-full border rounded-xl p-3 text-sm border-slate-200 text-slate-950 focus:outline-emerald-500"
             />
           </div>
