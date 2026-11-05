@@ -12,7 +12,7 @@ export default function HomePage() {
   const adminMenus = [
     {
       title: "ออก QR สะสมพ้อยท์",
-      desc: "คิดเงินตามน้ำหนักตันจริง และออก One-Time QR Code เฉพาะรายบุคคล",
+      desc: "คิดคะแนนสะสมพ้อยท์ให้ชาวไร่ผ่าน QR Code",
       href: "/admin/weigh-slip",
       tag: "แนะนำ",
       tagColor: "bg-amber-500",
@@ -20,7 +20,7 @@ export default function HomePage() {
     },
     {
       title: "แดชบอร์ดคะแนนทั้งหมด",
-      desc: "ดูคะแนนสะสมของชาวไร่ทุกคน อัปเดตอัตโนมัติทุก 5 วินาที",
+      desc: "ดูคะแนนสะสมพ้อยท์ของชาวไร่ทั้งหมดในระบบ",
       href: "/admin/points",
       tag: "Live",
       tagColor: "bg-green-600",
@@ -28,7 +28,7 @@ export default function HomePage() {
     },
     {
       title: "จัดการผู้ใช้ & ชาวไร่ ",
-      desc: "ดูข้อมูล เพิ่ม ลบ แก้ไข และปรับแต้มสะสมในฐานข้อมูล",
+      desc: "ดูข้อมูลผู้ใช้ในฐานข้อมูล",
       href: "/admin/farmers",
       tag: "Database",
       tagColor: "bg-purple-600",
