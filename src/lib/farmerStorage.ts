@@ -997,6 +997,50 @@ export async function expireOverdueTickets(): Promise<{ expiredCount: number }> 
 }
 
 /** สรุปรายวัน — ใช้ใน Admin Report */
+export async function getAllTickets(filters?: {
+  startDate?: string;
+  endDate?: string;
+  status?: string;
+  search?: string;
+  limit?: number;
+}): Promise<TicketRecord[]> {
+  const sql = getSql();
+  if (sql) {
+    try {
+      await ensureTables();
+      const statusFilter = filters?.status && filters.status !== "ALL" ? filters.status : null;
+      const searchLike = filters?.search?.trim() ? `%${filters.search.trim()}%` : null;
+      const start = filters?.startDate ? `${filters.startDate} 00:00:00+07` : null;
+      const end = filters?.endDate ? `${filters.endDate} 23:59:59+07` : null;
+      const maxRows = filters?.limit || 2000;
+
+      const rows = await sql`
+        SELECT * FROM tickets
+        WHERE (${statusFilter}::TEXT IS NULL OR status = ${statusFilter})
+          AND (${searchLike}::TEXT IS NULL OR farmer_name ILIKE ${searchLike} OR plate_no ILIKE ${searchLike} OR ticket_no ILIKE ${searchLike})
+          AND (${start}::TIMESTAMPTZ IS NULL OR created_at >= ${start}::TIMESTAMPTZ)
+          AND (${end}::TIMESTAMPTZ IS NULL OR created_at <= ${end}::TIMESTAMPTZ)
+        ORDER BY created_at DESC
+        LIMIT ${maxRows}
+      `;
+      return rows.map(mapTicketRow);
+    } catch (err) {
+      console.error("Postgres getAllTickets error:", err);
+    }
+  }
+
+  // Fallback CrudCrud
+  try {
+    const res = await fetch(CLOUD_TICKETS_URL, { cache: "no-store" });
+    if (res.ok) {
+      const list: any[] = await res.json();
+      return list.map(mapTicketRow).sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+    }
+  } catch {}
+  return [];
+}
+
+/** สรุปรายวัน — ใช้ใน Admin Report */
 export async function getDailyReport(dateStr?: string): Promise<{
   date: string;
   totalTickets: number;

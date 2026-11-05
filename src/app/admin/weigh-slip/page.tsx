@@ -471,7 +471,7 @@ export default function WeighSlipGenerator() {
                     }}
                     onFocus={() => setShowDropdown(true)}
                     placeholder="พิมพ์ชื่อ นามสกุล หรือเบอร์โทร..."
-                    className="w-full border rounded-xl p-3 text-sm border-slate-200 focus:outline-emerald-500 pr-10"
+                    className="w-full border rounded-xl p-3 text-sm border-slate-200 text-slate-900 focus:outline-emerald-500 pr-10"
                   />
                   {selectedFarmer && (
                     <button
@@ -550,7 +550,7 @@ export default function WeighSlipGenerator() {
                   onChange={(e) => setPlateNo(e.target.value.toUpperCase())}
                   placeholder="เช่น 80-1234 หรือ กข-9999"
                   maxLength={20}
-                  className="w-full border rounded-xl p-3 text-sm border-slate-200 focus:outline-emerald-500 font-mono uppercase"
+                  className="w-full border rounded-xl p-3 text-sm border-slate-200 text-slate-900 focus:outline-emerald-500 font-mono uppercase"
                 />
               </div>
 

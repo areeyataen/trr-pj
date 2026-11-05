@@ -34,6 +34,14 @@ export default function HomePage() {
       tagColor: "bg-purple-600",
       icon: "🌾",
     },
+    {
+      title: "ประวัติตั๋วชั่ง & Export Excel",
+      desc: "ดูประวัติย้อนหลังรายวัน/เดือน/ปี และส่งออกไฟล์ Excel (CSV)",
+      href: "/admin/history",
+      tag: "Export",
+      tagColor: "bg-blue-600",
+      icon: "📊",
+    },
   ];
 
   return (
